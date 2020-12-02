@@ -12,7 +12,7 @@ import com.ipartek.formacion.ejemplomvc.accesodatos.Dao;
 import com.ipartek.formacion.ejemplomvc.accesodatos.PerroDaoTreeMap;
 import com.ipartek.formacion.ejemplomvc.modelos.Perro;
 
-@WebServlet("/")
+@WebServlet("/") //para que solo con escribir la url salga, sin poner el index.
 public class IndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
