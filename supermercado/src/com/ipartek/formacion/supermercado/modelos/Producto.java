@@ -1,8 +1,12 @@
 package com.ipartek.formacion.supermercado.modelos;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Producto {
+public class Producto implements Serializable {
+
+	private static final long serialVersionUID = 5452816664057554386L;
+
 	private Long id;
 	private String nombre;
 	private String descripcion;
@@ -12,7 +16,7 @@ public class Producto {
 	private String unidadMedida;
 	private BigDecimal precioUnidadMedida;
 	private Integer cantidad;
-	
+
 	public Producto(Long id, String nombre, String descripcion, String urlImagen, BigDecimal precio, Integer descuento,
 			String unidadMedida, BigDecimal precioUnidadMedida, Integer cantidad) {
 		super();
@@ -98,18 +102,18 @@ public class Producto {
 	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
-	
+
 	public BigDecimal getPrecioConDescuento() {
-		//return precio - precio * descuento / 100
-		
-		if(descuento == null || descuento == 0) {
-			return null;
+
+		if (descuento == null || descuento == 0) {
+			// return null;
+			return precio;
 		}
-		
-		if(descuento == 100) {
+
+		if (descuento == 100) {
 			return BigDecimal.ZERO;
 		}
-		
+		// return precio - (precio * (descuento / 100));
 		return precio.subtract(precio.multiply(new BigDecimal(descuento).divide(new BigDecimal(100))));
 	}
 

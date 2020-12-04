@@ -3,6 +3,8 @@ package com.ipartek.formacion.supermercado.accesodatos;
 import java.math.BigDecimal;
 import java.util.TreeMap;
 
+import org.apache.commons.lang3.SerializationUtils;
+
 import com.ipartek.formacion.supermercado.modelos.Producto;
 
 public class ProductoDaoTreeMap implements Dao<Producto> {
@@ -10,16 +12,21 @@ public class ProductoDaoTreeMap implements Dao<Producto> {
 	private static TreeMap<Long, Producto> productos = new TreeMap<>();
 
 	static {
-		productos.put(1L, new Producto(1L, "Beefeater", "Botella de ginebra que tle mola cannnnntidad", "http://placeimg.com/640/480/tech?1",
-				new BigDecimal("12.95"), 20, "Litro", new BigDecimal("18.50"), 1));
+		productos.put(1L,
+				new Producto(1L, "Beefeater", "Botella de ginebra que tle mola cannnnntidad",
+						"http://placeimg.com/640/480/tech?1", new BigDecimal("12.95"), 20, "Litro",
+						new BigDecimal("18.50"), 1));
 		productos.put(2L,
 				new Producto(2L, "Beefeater light",
-						"Botella de ginebra que tle mola cannnnntidad perrroooo más blarata", "http://placeimg.com/640/480/tech?2",
-						new BigDecimal("7.90"), null, "Litro", new BigDecimal("18.50"), 1));
+						"Botella de ginebra que tle mola cannnnntidad perrroooo más blarata",
+						"http://placeimg.com/640/480/tech?2", new BigDecimal("71234123.90"), null, "Litro",
+						new BigDecimal("18.50"), 1));
 
 		for (Long id = 3L; id <= 12L; id++) {
-			productos.put(id, new Producto(id, "Producto" + id, "Descripción" + id, "http://placeimg.com/640/480/tech?" + id,
-					new BigDecimal(11 * id), id.intValue(), "Unidad" + id, new BigDecimal(10 * id), id.intValue()));
+			productos.put(id,
+					new Producto(id, "Producto" + id, "Descripción" + id, "http://placeimg.com/640/480/tech?" + id,
+							new BigDecimal(11 * id), id.intValue(), "Unidad" + id, new BigDecimal(10 * id),
+							id.intValue()));
 		}
 	}
 
@@ -53,7 +60,8 @@ public class ProductoDaoTreeMap implements Dao<Producto> {
 
 	@Override
 	public Producto obtenerPorId(Long id) {
-		return productos.get(id);
+		// return productos.get(id);
+		return SerializationUtils.clone(productos.get(id));
 	}
 
 	@Override

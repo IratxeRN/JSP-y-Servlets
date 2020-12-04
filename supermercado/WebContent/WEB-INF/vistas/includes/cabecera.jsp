@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:setLocale value="es_ES"/>
 <!doctype html>
 <html lang="es">
 <head>
-
+<%-- <base href="/supermercado/" /> --%>
 <base href="${pageContext.request.contextPath}/" />
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -38,8 +41,20 @@
 					</a></li>
 				</ul>
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="login">Login</a>
-					</li>
+					<li class="nav-item"><a class="nav-link" href="carrito">Ver carrito</a>
+					<!-- Cabecera con opcion diferente dependiendo de si se esta conectado o no -->
+					<c:choose>
+						<c:when test="${sessionScope.usuario == null}">
+							<li class="nav-item"><a class="nav-link" href="login">Iniciar sesión</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="nav-item"><a class="navbar-text">${sessionScope.usuario.email}</a>
+							</li>
+							<li class="nav-item"><a class="nav-link" href="logout">Cerrar sesión</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 
 			</div>
