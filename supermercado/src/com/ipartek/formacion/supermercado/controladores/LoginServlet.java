@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
 
 		DaoUsuario<Usuario> daouser = UsuarioDaoTreeMap.getInstancia();
 		Usuario usuario = daouser.obtenerPorEmail(email);
-		
+
 		if (usuario != null && usuario.getPassword().equals(password)) {
 
 			// HttpSession session = request.getSession();
@@ -36,7 +36,8 @@ public class LoginServlet extends HttpServlet {
 			// igual que lo de arriba pero sin crear variable session.
 
 			request.getSession().setAttribute("usuario", usuario);
-			request.getRequestDispatcher("/principal").forward(request, response);
+			// request.getRequestDispatcher("/admin/index").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/admin/index");
 		} else {
 			request.getRequestDispatcher("/WEB-INF/vistas/login.jsp").forward(request, response);
 		}
